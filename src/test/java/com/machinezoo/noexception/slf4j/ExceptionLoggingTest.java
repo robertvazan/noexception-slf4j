@@ -8,15 +8,17 @@ import java.io.*;
 import java.security.*;
 import java.util.function.*;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.*;
 import com.github.valfirst.slf4jtest.*;
 import com.machinezoo.noexception.*;
 
+@ExtendWith(TestLoggerFactoryExtension.class)
 public class ExceptionLoggingTest {
 	TestLogger sharedLogger = TestLoggerFactory.getTestLogger(ExceptionLogging.class);
 	TestLogger customLogger = TestLoggerFactory.getTestLogger(ExceptionLoggingTest.class);
 	@Test
 	public void log_runtime() {
-		Exceptions.log().run(() -> {
+		ExceptionLogging.log().run(() -> {
 			throw new NumberFormatException();
 		});
 		assertEquals(1, sharedLogger.getLoggingEvents().size());
@@ -26,7 +28,7 @@ public class ExceptionLoggingTest {
 	}
 	@Test
 	public void log_error() {
-		Exceptions.log().run(() -> {
+		ExceptionLogging.log().run(() -> {
 			throw new IOError(new IOException());
 		});
 		assertEquals(1, sharedLogger.getLoggingEvents().size());
@@ -34,7 +36,7 @@ public class ExceptionLoggingTest {
 	}
 	@Test
 	public void log_interrupt() {
-		Exceptions.log().run(Exceptions.sneak().runnable(() -> {
+		ExceptionLogging.log().run(Exceptions.sneak().runnable(() -> {
 			throw new InterruptedException();
 		}));
 		assertTrue(Thread.interrupted());
@@ -43,36 +45,36 @@ public class ExceptionLoggingTest {
 	}
 	@Test
 	public void logTo() {
-		Exceptions.log(customLogger).run(() -> {
+		ExceptionLogging.log(customLogger).run(() -> {
 			throw new NumberFormatException();
 		});
 		assertEquals(0, sharedLogger.getLoggingEvents().size());
 		assertEquals(1, customLogger.getLoggingEvents().size());
-		assertThrows(NullPointerException.class, () -> Exceptions.log(null));
+		assertThrows(NullPointerException.class, () -> ExceptionLogging.log(null));
 	}
 	@Test
 	public void logWithMessage() {
-		Exceptions.log(customLogger, "Commented exception.").run(() -> {
+		ExceptionLogging.log(customLogger, "Commented exception.").run(() -> {
 			throw new NumberFormatException();
 		});
 		assertEquals(1, customLogger.getLoggingEvents().size());
 		assertEquals("Commented exception.", customLogger.getLoggingEvents().get(0).getMessage());
-		assertThrows(NullPointerException.class, () -> Exceptions.log(null, "Message."));
-		assertThrows(NullPointerException.class, () -> Exceptions.log(customLogger, (String)null));
+		assertThrows(NullPointerException.class, () -> ExceptionLogging.log(null, "Message."));
+		assertThrows(NullPointerException.class, () -> ExceptionLogging.log(customLogger, (String)null));
 	}
 	@Test
 	public void logWithLazyMessage() {
-		Exceptions.log(customLogger, () -> "Lazy message.").run(() -> {
+		ExceptionLogging.log(customLogger, () -> "Lazy message.").run(() -> {
 			throw new NumberFormatException();
 		});
 		assertEquals(1, customLogger.getLoggingEvents().size());
 		assertEquals("Lazy message.", customLogger.getLoggingEvents().get(0).getMessage());
-		assertThrows(NullPointerException.class, () -> Exceptions.log(null, () -> "Message."));
-		assertThrows(NullPointerException.class, () -> Exceptions.log(customLogger, (Supplier<String>)null));
+		assertThrows(NullPointerException.class, () -> ExceptionLogging.log(null, () -> "Message."));
+		assertThrows(NullPointerException.class, () -> ExceptionLogging.log(customLogger, (Supplier<String>)null));
 	}
 	@Test
 	public void logWithLazyMessage_null() {
-		Exceptions.log(customLogger, () -> null).run(() -> {
+		ExceptionLogging.log(customLogger, () -> null).run(() -> {
 			throw new NumberFormatException();
 		});
 		assertEquals(1, customLogger.getLoggingEvents().size());
@@ -81,7 +83,7 @@ public class ExceptionLoggingTest {
 	}
 	@Test
 	public void logWithLazyMessage_throwing() {
-		Exceptions.log(customLogger, () -> {
+		ExceptionLogging.log(customLogger, () -> {
 			throw new InvalidParameterException();
 		}).run(() -> {
 			throw new NumberFormatException();
