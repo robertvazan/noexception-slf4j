@@ -16,6 +16,16 @@ jdk_version = lambda: 11
 project_status = lambda: stable_status()
 
 def dependencies():
+    use_noexception()
+    use_slf4j()
     use_junit()
+    use_hamcrest()
+    use_slf4j_test()
+
+# No link to SLF4J, because automatic modules cannot be linked.
+javadoc_links = lambda: [
+    *standard_javadoc_links(),
+    'https://noexception.machinezoo.com/javadoc/'
+]
 
 generate()

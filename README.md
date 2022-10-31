@@ -23,7 +23,7 @@ See [homepage](https://noexception.machinezoo.com/slf4j).
 ## Documentation
 
 * [Homepage](https://noexception.machinezoo.com/slf4j)
-* [Javadoc](https://noexception.machinezoo.com/javadocs/slf4j/)
+* [Javadoc](https://noexception.machinezoo.com/javadocs/slf4j/com.machinezoo.noexception.slf4j/com/machinezoo/noexception/slf4j/package-summary.html)
 
 ## Feedback
 
