@@ -5,7 +5,7 @@
 
 	<groupId>com.machinezoo.noexception</groupId>
 	<artifactId>noexception-slf4j</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.0</version>
 
 	<name>SLF4J extension for NoException</name>
 	<description>Exception handlers that log all exceptions into SLF4J loggers.</description>
