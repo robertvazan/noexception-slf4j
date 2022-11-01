@@ -18,6 +18,8 @@ import com.machinezoo.noexception.*;
 public class ExceptionLogging {
 	private static final Logger logger = LoggerFactory.getLogger(ExceptionLogging.class);
 	private static final LoggingHandler DEFAULT = new LoggingHandler(logger, () -> "Caught exception.");
+	private ExceptionLogging() {
+	}
 	/**
 	 * Returns {@code ExceptionHandler} that writes all exceptions to common logger.
 	 * Logs are written to SLF4J logger named after this class.
