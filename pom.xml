@@ -47,7 +47,7 @@
 		<dependency>
 			<groupId>com.machinezoo.noexception</groupId>
 			<artifactId>noexception</artifactId>
-			<version>1.8.0</version>
+			<version>1.9.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -114,7 +114,7 @@
 						<![CDATA[<!-- No copyright message. -->]]>
 					</bottom>
 					<links>
-						<link>https://noexception.machinezoo.com/javadoc/</link>
+						<link>https://noexception.machinezoo.com/javadocs/core/</link>
 					</links>
 				</configuration>
 				<executions>

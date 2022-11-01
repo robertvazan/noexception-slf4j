@@ -25,7 +25,7 @@ def dependencies():
 # No link to SLF4J, because automatic modules cannot be linked.
 javadoc_links = lambda: [
     *standard_javadoc_links(),
-    'https://noexception.machinezoo.com/javadoc/'
+    'https://noexception.machinezoo.com/javadocs/core/'
 ]
 
 generate()

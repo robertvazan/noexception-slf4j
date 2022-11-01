@@ -8,7 +8,7 @@
 [![Test coverage](https://codecov.io/gh/robertvazan/noexception-slf4j/branch/master/graph/badge.svg)](https://codecov.io/gh/robertvazan/noexception-slf4j)
 
 This extension of [NoException](https://noexception.machinezoo.com/) library adds exception handlers
-that log all exceptions into [SLF4J](https://www.slf4j.org/) loggers.
+that log all exceptions to [SLF4J](https://www.slf4j.org/) loggers.
 
 More on [homepage](https://noexception.machinezoo.com/slf4j).
 
