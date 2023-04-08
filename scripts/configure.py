@@ -1,31 +1,27 @@
 # This script generates and updates project configuration files.
 
-# We are assuming that project-config is available in sibling directory.
-# Checkout from https://github.com/robertvazan/project-config
-import pathlib
-project_directory = lambda: pathlib.Path(__file__).parent.parent
-config_directory = lambda: project_directory().parent/'project-config'
-exec((config_directory()/'src'/'java.py').read_text())
+# Run this script with rvscaffold in PYTHONPATH
+import rvscaffold as scaffold
 
-project_script_path = __file__
-repository_name = lambda: 'noexception-slf4j'
-pretty_name = lambda: 'SLF4J extension for NoException'
-pom_description = lambda: 'Exception handlers that log all exceptions into SLF4J loggers.'
-inception_year = lambda: 2022
-jdk_version = lambda: 11
-project_status = lambda: stable_status()
+class Project(scaffold.Java):
+    def script_path_text(self): return __file__
+    def repository_name(self): return 'noexception-slf4j'
+    def pretty_name(self): return 'SLF4J extension for NoException'
+    def pom_description(self): return 'Exception handlers that log all exceptions into SLF4J loggers.'
+    def inception_year(self): return 2022
+    def project_status(self): return self.stable_status()
+    
+    def dependencies(self):
+        yield from super().dependencies()
+        yield self.use_noexception()
+        yield self.use_slf4j()
+        yield self.use_junit()
+        yield self.use_hamcrest()
+        yield self.use_slf4j_test()
+    
+    # No link to SLF4J, because automatic modules cannot be linked.
+    def javadoc_links(self):
+        yield from super().javadoc_links()
+        yield 'https://noexception.machinezoo.com/javadocs/core/'
 
-def dependencies():
-    use_noexception()
-    use_slf4j()
-    use_junit()
-    use_hamcrest()
-    use_slf4j_test()
-
-# No link to SLF4J, because automatic modules cannot be linked.
-javadoc_links = lambda: [
-    *standard_javadoc_links(),
-    'https://noexception.machinezoo.com/javadocs/core/'
-]
-
-generate()
+Project().generate()
