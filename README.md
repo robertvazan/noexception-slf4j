@@ -3,7 +3,7 @@
 
 # SLF4J extension for NoException
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.machinezoo.noexception/noexception-slf4j)](https://search.maven.org/artifact/com.machinezoo.noexception/noexception-slf4j)
+[![Maven Central](https://img.shields.io/maven-central/v/com.machinezoo.noexception/noexception-slf4j)](https://central.sonatype.com/artifact/com.machinezoo.noexception/noexception-slf4j)
 [![Build status](https://github.com/robertvazan/noexception-slf4j/workflows/build/badge.svg)](https://github.com/robertvazan/noexception-slf4j/actions/workflows/build.yml)
 [![Test coverage](https://codecov.io/gh/robertvazan/noexception-slf4j/branch/master/graph/badge.svg)](https://codecov.io/gh/robertvazan/noexception-slf4j)
 
